@@ -16,7 +16,7 @@ LD=rgblink
 FX=rgbfix
 
 AS_FLAGS= -iinclude
-LD_FLAGS= 
+LD_FLAGS= -n $(BUILD_DIR)/$(NAME).sym -m $(BUILD_DIR)/$(NAME).map
 FX_FLAGS= -v -p 0 -C
 
 RM=rm
@@ -41,4 +41,4 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.z80
 	$(AS) $(AS_FLAGS) $< -o $@
 
 clean:
-	$(RM) -f $(BUILD_DIR)/$(TARGET) $(OBJ_DIR)/*.o
+	$(RM) -f $(BUILD_DIR)/* $(OBJ_DIR)/*.o
