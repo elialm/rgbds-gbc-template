@@ -11,3 +11,9 @@ __main::
 
 end:
     halt
+
+; Example subroutine
+; will increment the value in a by 1
+increment_a:
+    inc a
+    ret

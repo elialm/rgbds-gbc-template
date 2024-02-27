@@ -7,9 +7,11 @@ NAME=template
 SRC_DIR=src
 OBJ_DIR=obj
 BUILD_DIR=build
+TEST_DIR=test
 
 ASM_FILES=$(wildcard $(SRC_DIR)/*.z80)
 OBJ_FILES=$(ASM_FILES:$(SRC_DIR)/%.z80=$(OBJ_DIR)/%.o)
+TEST_FILES=$(wildcard $(TEST_DIR)/*.toml)
 
 AS=rgbasm
 LD=rgblink
@@ -42,3 +44,10 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.z80
 
 clean:
 	$(RM) -f $(BUILD_DIR)/* $(OBJ_DIR)/*.o
+
+test: $(BUILD_DIR)/$(TARGET)
+	@for file in "$(TEST_FILES)"; do \
+		echo "Running tests in $$file..."; \
+		evunit -c $$file -d dump -n $(BUILD_DIR)/$(NAME).sym $(BUILD_DIR)/$(TARGET); \
+		echo; \
+	done

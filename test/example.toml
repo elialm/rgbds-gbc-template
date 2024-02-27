@@ -1,0 +1,9 @@
+sp = 0xFFFE
+caller = "end"
+exit = "end"
+
+[add-one]
+pc = "increment_a"
+a = 5
+[add-one.result]
+a = 6
